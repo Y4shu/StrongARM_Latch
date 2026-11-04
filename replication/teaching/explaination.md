@@ -1,0 +1,1 @@
+This was a trial schematic, the final schematic final is under "StrongARM65.asc" in the replication folder. This teaching model can be used to see if you wish to run the model once with the pre provided models and not specified model.
