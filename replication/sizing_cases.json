@@ -1,0 +1,182 @@
+[
+  {
+    "case": 0,
+    "name": "Paper dimensions / PTM65 baseline",
+    "params": {
+      "W_IN": 7.2e-07,
+      "L_IN": 1.8e-07,
+      "W_TAIL": 7.2e-07,
+      "L_TAIL": 1.8e-07,
+      "W_RST": 1.13e-06,
+      "L_RST": 1.8e-07,
+      "W_PREG": 1.13e-06,
+      "L_PREG": 1.8e-07,
+      "W_CAS": 3.6e-07,
+      "L_CAS": 1.8e-07,
+      "W_NREG": 7.2e-07,
+      "L_NREG": 1.8e-07
+    }
+  },
+  {
+    "case": 1,
+    "name": "All L=130nm; baseline widths",
+    "params": {
+      "W_IN": 7.2e-07,
+      "L_IN": 1.3e-07,
+      "W_TAIL": 7.2e-07,
+      "L_TAIL": 1.3e-07,
+      "W_RST": 1.13e-06,
+      "L_RST": 1.3e-07,
+      "W_PREG": 1.13e-06,
+      "L_PREG": 1.3e-07,
+      "W_CAS": 3.6e-07,
+      "L_CAS": 1.3e-07,
+      "W_NREG": 7.2e-07,
+      "L_NREG": 1.3e-07
+    }
+  },
+  {
+    "case": 2,
+    "name": "All L=65nm; baseline widths",
+    "params": {
+      "W_IN": 7.2e-07,
+      "L_IN": 6.5e-08,
+      "W_TAIL": 7.2e-07,
+      "L_TAIL": 6.5e-08,
+      "W_RST": 1.13e-06,
+      "L_RST": 6.5e-08,
+      "W_PREG": 1.13e-06,
+      "L_PREG": 6.5e-08,
+      "W_CAS": 3.6e-07,
+      "L_CAS": 6.5e-08,
+      "W_NREG": 7.2e-07,
+      "L_NREG": 6.5e-08
+    }
+  },
+  {
+    "case": 3,
+    "name": "Mixed lengths; baseline widths",
+    "params": {
+      "W_IN": 7.2e-07,
+      "L_IN": 1.3e-07,
+      "W_TAIL": 7.2e-07,
+      "L_TAIL": 6.5e-08,
+      "W_RST": 1.13e-06,
+      "L_RST": 6.5e-08,
+      "W_PREG": 1.13e-06,
+      "L_PREG": 1.3e-07,
+      "W_CAS": 3.6e-07,
+      "L_CAS": 6.5e-08,
+      "W_NREG": 7.2e-07,
+      "L_NREG": 1.3e-07
+    }
+  },
+  {
+    "case": 4,
+    "name": "Mixed; tail and clocked cascodes x1.5",
+    "params": {
+      "W_IN": 7.2e-07,
+      "L_IN": 1.3e-07,
+      "W_TAIL": 1.08e-06,
+      "L_TAIL": 6.5e-08,
+      "W_RST": 1.13e-06,
+      "L_RST": 6.5e-08,
+      "W_PREG": 1.13e-06,
+      "L_PREG": 1.3e-07,
+      "W_CAS": 5.4e-07,
+      "L_CAS": 6.5e-08,
+      "W_NREG": 7.2e-07,
+      "L_NREG": 1.3e-07
+    }
+  },
+  {
+    "case": 5,
+    "name": "Mixed; input devices x2",
+    "params": {
+      "W_IN": 1.44e-06,
+      "L_IN": 1.3e-07,
+      "W_TAIL": 7.2e-07,
+      "L_TAIL": 6.5e-08,
+      "W_RST": 1.13e-06,
+      "L_RST": 6.5e-08,
+      "W_PREG": 1.13e-06,
+      "L_PREG": 1.3e-07,
+      "W_CAS": 3.6e-07,
+      "L_CAS": 6.5e-08,
+      "W_NREG": 7.2e-07,
+      "L_NREG": 1.3e-07
+    }
+  },
+  {
+    "case": 6,
+    "name": "Mixed; PMOS regeneration x0.5",
+    "params": {
+      "W_IN": 7.2e-07,
+      "L_IN": 1.3e-07,
+      "W_TAIL": 7.2e-07,
+      "L_TAIL": 6.5e-08,
+      "W_RST": 1.13e-06,
+      "L_RST": 6.5e-08,
+      "W_PREG": 5.65e-07,
+      "L_PREG": 1.3e-07,
+      "W_CAS": 3.6e-07,
+      "L_CAS": 6.5e-08,
+      "W_NREG": 7.2e-07,
+      "L_NREG": 1.3e-07
+    }
+  },
+  {
+    "case": 7,
+    "name": "Mixed; PMOS regeneration x2",
+    "params": {
+      "W_IN": 7.2e-07,
+      "L_IN": 1.3e-07,
+      "W_TAIL": 7.2e-07,
+      "L_TAIL": 6.5e-08,
+      "W_RST": 1.13e-06,
+      "L_RST": 6.5e-08,
+      "W_PREG": 2.26e-06,
+      "L_PREG": 1.3e-07,
+      "W_CAS": 3.6e-07,
+      "L_CAS": 6.5e-08,
+      "W_NREG": 7.2e-07,
+      "L_NREG": 1.3e-07
+    }
+  },
+  {
+    "case": 8,
+    "name": "Mixed; all widths x0.5",
+    "params": {
+      "W_IN": 3.6e-07,
+      "L_IN": 1.3e-07,
+      "W_TAIL": 3.6e-07,
+      "L_TAIL": 6.5e-08,
+      "W_RST": 5.65e-07,
+      "L_RST": 6.5e-08,
+      "W_PREG": 5.65e-07,
+      "L_PREG": 1.3e-07,
+      "W_CAS": 1.8e-07,
+      "L_CAS": 6.5e-08,
+      "W_NREG": 3.6e-07,
+      "L_NREG": 1.3e-07
+    }
+  },
+  {
+    "case": 9,
+    "name": "Mixed; all widths x2",
+    "params": {
+      "W_IN": 1.44e-06,
+      "L_IN": 1.3e-07,
+      "W_TAIL": 1.44e-06,
+      "L_TAIL": 6.5e-08,
+      "W_RST": 2.26e-06,
+      "L_RST": 6.5e-08,
+      "W_PREG": 2.26e-06,
+      "L_PREG": 1.3e-07,
+      "W_CAS": 7.2e-07,
+      "L_CAS": 6.5e-08,
+      "W_NREG": 1.44e-06,
+      "L_NREG": 1.3e-07
+    }
+  }
+]
