@@ -1,0 +1,49 @@
+* Repeat positive-input short delay with finer timestep
+* f_=Figure 4 case 2; s_=conventional StrongARM.
+.include "65nm.pm"
+.include "dimensions.inc"
+.include "cores.inc"
+.param VSUP=1.1 VCM=0.65 VDIFF=0.10 CLOAD=5f DV=1m
+.temp 27
+.option post=2 probe runlvl=5 delmax=0.5p ingold=2 measdgt=8
+VDD_F fvdd 0 'VSUP'
+VDD_S svdd 0 'VSUP'
+VCLK clk 0 PULSE(0 'VSUP' 2n 20p 20p 4.98n 10n)
+VREF vref 0 'VCM'
+CFP f_p 0 'CLOAD'
+CFN f_n 0 'CLOAD'
+CSP s_p 0 'CLOAD'
+CSN s_n 0 'CLOAD'
+VINP vinp 0 'VCM+VDIFF'
+VINN vinn 0 'VCM'
+XF vinp vinn vref vref clk f_p f_n fvdd 0 fig4
+XS vinp vinn clk s_p s_n svdd 0 conventional
+.measure tran f_comp TRIG V(clk) VAL='VSUP/2' TD=11n RISE=1
++ TARG V(f_n) VAL='VSUP/2' TD=12n FALL=1
+.measure tran f_rst TRIG V(clk) VAL='VSUP/2' TD=16n FALL=1
++ TARG V(f_n) VAL='VSUP/2' TD=17n RISE=1
+.measure tran f_avg PARAM='(f_comp+f_rst)/2'
+.measure tran s_comp TRIG V(clk) VAL='VSUP/2' TD=11n RISE=1
++ TARG V(s_n) VAL='VSUP/2' TD=12n FALL=1
+.measure tran s_rst TRIG V(clk) VAL='VSUP/2' TD=16n FALL=1
++ TARG V(s_n) VAL='VSUP/2' TD=17n RISE=1
+.measure tran s_avg PARAM='(s_comp+s_rst)/2'
+.measure tran f_p16 FIND V(f_p) AT=16n
+.measure tran f_p19 FIND V(f_p) AT=19n
+.measure tran f_p26 FIND V(f_p) AT=26n
+.measure tran f_p29 FIND V(f_p) AT=29n
+.measure tran f_n16 FIND V(f_n) AT=16n
+.measure tran f_n19 FIND V(f_n) AT=19n
+.measure tran f_n26 FIND V(f_n) AT=26n
+.measure tran f_n29 FIND V(f_n) AT=29n
+.measure tran s_p16 FIND V(s_p) AT=16n
+.measure tran s_p19 FIND V(s_p) AT=19n
+.measure tran s_p26 FIND V(s_p) AT=26n
+.measure tran s_p29 FIND V(s_p) AT=29n
+.measure tran s_n16 FIND V(s_n) AT=16n
+.measure tran s_n19 FIND V(s_n) AT=19n
+.measure tran s_n26 FIND V(s_n) AT=26n
+.measure tran s_n29 FIND V(s_n) AT=29n
+.tran 0.5p 30n
+.probe tran V(clk) V(vinp) V(vinn) V(vref) V(f_p) V(f_n) V(s_p) V(s_n) I(VDD_F) I(VDD_S)
+.end

@@ -1,0 +1,29 @@
+* Figures 7 to 9 style slow ramp and output overshoot
+* f_=Figure 4 case 2; s_=conventional StrongARM.
+.include "65nm.pm"
+.include "dimensions.inc"
+.include "cores.inc"
+.param VSUP=1.1 VCM=0.65 VDIFF=0.10 CLOAD=5f DV=1m
+.temp 27
+.options plotwinsize=0 measdgt=8
+VDD_F fvdd 0 {VSUP}
+VDD_S svdd 0 {VSUP}
+VCLK clk 0 PULSE(0 {VSUP} 2n 20p 20p 4.98n 10n)
+VREF vref 0 {VCM}
+CFP f_p 0 {CLOAD}
+CFN f_n 0 {CLOAD}
+CSP s_p 0 {CLOAD}
+CSN s_n 0 {CLOAD}
+VINP vinp 0 PWL(0 0 2.5u {VSUP} 5u 0)
+VINN vinn 0 {VCM}
+XF vinp vinn vref vref clk f_p f_n fvdd 0 fig4
+XS vinp vinn clk s_p s_n svdd 0 conventional
+.measure tran f_peak_p MAX V(f_p) FROM=10n TO=5u
+.measure tran f_peak_n MAX V(f_n) FROM=10n TO=5u
+.measure tran f_over PARAM max(0,max(f_peak_p,f_peak_n)-VSUP)
+.measure tran s_peak_p MAX V(s_p) FROM=10n TO=5u
+.measure tran s_peak_n MAX V(s_n) FROM=10n TO=5u
+.measure tran s_over PARAM max(0,max(s_peak_p,s_peak_n)-VSUP)
+.tran 0 5u 0 10p
+.save V(clk) V(vinp) V(vinn) V(vref) V(f_p) V(f_n) V(s_p) V(s_n) I(VDD_F) I(VDD_S)
+.end

@@ -1,0 +1,67 @@
+* Nominal model supply sensitivity, not process corners
+* f_=Figure 4 case 2; s_=conventional StrongARM.
+.include "65nm.pm"
+.include "dimensions.inc"
+.include "cores.inc"
+.param VSUP=1.1 VCM=0.65 VDIFF=0.10 CLOAD=5f DV=1m
+.temp 27
+.options plotwinsize=0 measdgt=8
+VDD_F fvdd 0 {VSUP}
+VDD_S svdd 0 {VSUP}
+VCLK clk 0 PULSE(0 {VSUP} 2n 20p 20p 4.98n 10n)
+VREF vref 0 {VCM}
+CFP f_p 0 {CLOAD}
+CFN f_n 0 {CLOAD}
+CSP s_p 0 {CLOAD}
+CSN s_n 0 {CLOAD}
+VINP vinp 0 PWL(0 {VCM+VDIFF} 20n {VCM+VDIFF} 20.1n {VCM-VDIFF}
++ 40n {VCM-VDIFF} 40.1n {VCM+VDIFF} 60n {VCM+VDIFF}
++ 60.1n {VCM-VDIFF} 80n {VCM-VDIFF})
+VINN vinn 0 {VCM}
+XF vinp vinn vref vref clk f_p f_n fvdd 0 fig4
+XS vinp vinn clk s_p s_n svdd 0 conventional
+.measure tran supply_used FIND V(fvdd) AT=16n
+.measure tran f_comp TRIG V(clk) VAL={VSUP/2} TD=11n RISE=1
++ TARG V(f_n) VAL={VSUP/2} TD=12n FALL=1
+.measure tran f_rst TRIG V(clk) VAL={VSUP/2} TD=16n FALL=1
++ TARG V(f_n) VAL={VSUP/2} TD=17n RISE=1
+.measure tran f_comp_lo TRIG V(clk) VAL={VSUP/2} TD=21n RISE=1
++ TARG V(f_p) VAL={VSUP/2} TD=22n FALL=1
+.measure tran f_rst_lo TRIG V(clk) VAL={VSUP/2} TD=26n FALL=1
++ TARG V(f_p) VAL={VSUP/2} TD=27n RISE=1
+.measure tran f_avg PARAM (f_comp+f_rst)/2
+.measure tran s_comp TRIG V(clk) VAL={VSUP/2} TD=11n RISE=1
++ TARG V(s_n) VAL={VSUP/2} TD=12n FALL=1
+.measure tran s_rst TRIG V(clk) VAL={VSUP/2} TD=16n FALL=1
++ TARG V(s_n) VAL={VSUP/2} TD=17n RISE=1
+.measure tran s_comp_lo TRIG V(clk) VAL={VSUP/2} TD=21n RISE=1
++ TARG V(s_p) VAL={VSUP/2} TD=22n FALL=1
+.measure tran s_rst_lo TRIG V(clk) VAL={VSUP/2} TD=26n FALL=1
++ TARG V(s_p) VAL={VSUP/2} TD=27n RISE=1
+.measure tran s_avg PARAM (s_comp+s_rst)/2
+.measure tran f_p16 FIND V(f_p) AT=16n
+.measure tran f_p19 FIND V(f_p) AT=19n
+.measure tran f_p26 FIND V(f_p) AT=26n
+.measure tran f_p29 FIND V(f_p) AT=29n
+.measure tran f_n16 FIND V(f_n) AT=16n
+.measure tran f_n19 FIND V(f_n) AT=19n
+.measure tran f_n26 FIND V(f_n) AT=26n
+.measure tran f_n29 FIND V(f_n) AT=29n
+.measure tran s_p16 FIND V(s_p) AT=16n
+.measure tran s_p19 FIND V(s_p) AT=19n
+.measure tran s_p26 FIND V(s_p) AT=26n
+.measure tran s_p29 FIND V(s_p) AT=29n
+.measure tran s_n16 FIND V(s_n) AT=16n
+.measure tran s_n19 FIND V(s_n) AT=19n
+.measure tran s_n26 FIND V(s_n) AT=26n
+.measure tran s_n29 FIND V(s_n) AT=29n
+.measure tran f_iavg AVG I(VDD_F) FROM=10n TO=70n
+.measure tran f_power PARAM -VSUP*f_iavg
+.measure tran f_ecycle PARAM f_power*10n
+.measure tran s_iavg AVG I(VDD_S) FROM=10n TO=70n
+.measure tran s_power PARAM -VSUP*s_iavg
+.measure tran s_ecycle PARAM s_power*10n
+.tran 0 80n 0 2p
+.step param VSUP LIST 1.0 1.1 1.2
+.save V(clk) V(vinp) V(vinn) V(vref) V(f_p) V(f_n) V(s_p) V(s_n) I(VDD_F) I(VDD_S)
+.end

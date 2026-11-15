@@ -1,0 +1,32 @@
+* Constant common-mode differential decision boundary
+* f_=Figure 4 case 2; s_=conventional StrongARM.
+.include "65nm.pm"
+.include "dimensions.inc"
+.include "cores.inc"
+.param VSUP=1.1 VCM=0.65 VDIFF=0.10 CLOAD=5f DV=1m
+.temp 27
+.option post=2 probe runlvl=5 delmax=2p ingold=2 measdgt=8
+VDD_F fvdd 0 'VSUP'
+VDD_S svdd 0 'VSUP'
+VCLK clk 0 PULSE(0 'VSUP' 2n 20p 20p 4.98n 10n)
+VREF vref 0 'VCM'
+CFP f_p 0 'CLOAD'
+CFN f_n 0 'CLOAD'
+CSP s_p 0 'CLOAD'
+CSN s_n 0 'CLOAD'
+VINP vinp 0 'VCM+DV/2'
+VINN vinn 0 'VCM-DV/2'
+XF vinp vinn vref vref clk f_p f_n fvdd 0 fig4
+XS vinp vinn clk s_p s_n svdd 0 conventional
+.measure tran dv_actual FIND V(vinp,vinn) AT=16n
+.measure tran f_p16 FIND V(f_p) AT=16n
+.measure tran f_p26 FIND V(f_p) AT=26n
+.measure tran f_n16 FIND V(f_n) AT=16n
+.measure tran f_n26 FIND V(f_n) AT=26n
+.measure tran s_p16 FIND V(s_p) AT=16n
+.measure tran s_p26 FIND V(s_p) AT=26n
+.measure tran s_n16 FIND V(s_n) AT=16n
+.measure tran s_n26 FIND V(s_n) AT=26n
+.tran 2p 30n SWEEP DV -10m 10m 0.5m
+.probe tran V(clk) V(vinp) V(vinn) V(vref) V(f_p) V(f_n) V(s_p) V(s_n) I(VDD_F) I(VDD_S)
+.end

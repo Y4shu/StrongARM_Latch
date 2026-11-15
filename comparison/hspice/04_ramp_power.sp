@@ -1,0 +1,31 @@
+* Power over six cycles of the fast input ramp
+* f_=Figure 4 case 2; s_=conventional StrongARM.
+.include "65nm.pm"
+.include "dimensions.inc"
+.include "cores.inc"
+.param VSUP=1.1 VCM=0.65 VDIFF=0.10 CLOAD=5f DV=1m
+.temp 27
+.option post=2 probe runlvl=5 delmax=1p ingold=2 measdgt=8
+VDD_F fvdd 0 'VSUP'
+VDD_S svdd 0 'VSUP'
+VCLK clk 0 PULSE(0 'VSUP' 2n 20p 20p 4.98n 10n)
+VREF vref 0 'VCM'
+CFP f_p 0 'CLOAD'
+CFN f_n 0 'CLOAD'
+CSP s_p 0 'CLOAD'
+CSN s_n 0 'CLOAD'
+VINP vinp 0 PWL(0 0 5n 'VSUP' 10n 0 15n 'VSUP' 20n 0 25n 'VSUP'
++ 30n 0 35n 'VSUP' 40n 0 45n 'VSUP' 50n 0 55n 'VSUP'
++ 60n 0 65n 'VSUP' 70n 0 75n 'VSUP' 80n 0)
+VINN vinn 0 'VCM'
+XF vinp vinn vref vref clk f_p f_n fvdd 0 fig4
+XS vinp vinn clk s_p s_n svdd 0 conventional
+.measure tran f_iavg AVG I(VDD_F) FROM=10n TO=70n
+.measure tran f_power PARAM='-VSUP*f_iavg'
+.measure tran f_ecycle PARAM='f_power*10n'
+.measure tran s_iavg AVG I(VDD_S) FROM=10n TO=70n
+.measure tran s_power PARAM='-VSUP*s_iavg'
+.measure tran s_ecycle PARAM='s_power*10n'
+.tran 1p 80n
+.probe tran V(clk) V(vinp) V(vinn) V(vref) V(f_p) V(f_n) V(s_p) V(s_n) I(VDD_F) I(VDD_S)
+.end
